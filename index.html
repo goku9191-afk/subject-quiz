@@ -156,8 +156,20 @@ label{display:block;color:rgba(109,40,217,.65);font-size:.85rem;margin-bottom:7p
 </head>
 <body>
 
+<!-- 모드 선택 -->
+<div id="scrMode" class="screen active">
+<div class="center">
+  <div class="title"><span style="-webkit-text-fill-color:initial">📝</span> OX 퀴즈</div>
+  <div class="sub">누구로 참여하시나요?</div>
+  <div class="mode-grid">
+    <div class="mode-btn" onclick="show('scrHostSetup')"><span class="mode-icon">🧑‍🏫</span>선생님<br><small style="font-weight:400;opacity:.7">(게임 진행)</small></div>
+    <div class="mode-btn" onclick="show('scrPlayerJoin')"><span class="mode-icon">🙋</span>학생<br><small style="font-weight:400;opacity:.7">(게임 참여)</small></div>
+  </div>
+</div>
+</div>
+
 <!-- 선생님: 설정 -->
-<div id="scrHostSetup" class="screen active">
+<div id="scrHostSetup" class="screen">
 <div class="center">
   <div class="title" style="margin-bottom:4px;"><span style="-webkit-text-fill-color:initial">🎮</span> 게임 설정</div>
   <div class="sub" style="margin-bottom:12px;">과목 선택</div>
@@ -178,7 +190,7 @@ label{display:block;color:rgba(109,40,217,.65);font-size:.85rem;margin-bottom:7p
     <div class="cnt-btn" onclick="selCount(30,this)">30개</div>
   </div>
   <div style="display:flex;gap:10px;margin-top:14px;width:100%;max-width:360px;">
-    <button class="btn btn-ghost" style="white-space:nowrap;padding:15px 22px;font-size:1rem;" onclick="location.reload()">↺ 처음으로</button>
+    <button class="btn btn-ghost" style="white-space:nowrap;padding:15px 22px;font-size:1rem;" onclick="show('scrMode')">← 뒤로</button>
     <button class="btn btn-pri" style="flex:1;white-space:nowrap;font-size:1.1rem;padding:15px 0;" onclick="createRoom()">🚀 방 만들기</button>
   </div>
 </div>
@@ -277,6 +289,7 @@ label{display:block;color:rgba(109,40,217,.65);font-size:.85rem;margin-bottom:7p
     </div>
     <button class="btn btn-pri" style="width:100%;margin-top:10px;font-size:1.05rem;" onclick="joinRoom()">입장하기 🚪</button>
   </div>
+  <button class="btn btn-ghost" style="margin-top:10px;" onclick="show('scrMode')">← 뒤로</button>
 </div>
 </div>
 
@@ -819,6 +832,7 @@ function showPlayerResult(players,totalQ){
   updateTitle();
   const room=new URLSearchParams(location.search).get('room');
   if(room){$('inpCode').value=room.toUpperCase();$('inpName').focus();show('scrPlayerJoin');}
+  else if(new URLSearchParams(location.search).has('host'))show('scrHostSetup');
 })();
 </script>
 </body>
