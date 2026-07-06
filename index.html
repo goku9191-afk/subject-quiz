@@ -746,7 +746,8 @@ function subPlayerGame(){
       $('selInfo').textContent='';
       $('revDisp').style.display='block';
       const isOk=myA===ca;
-      $('revDisp').innerHTML=`<div style="font-size:3rem;margin-bottom:8px;">${ca==='O'?'⭕':'❌'}</div>`+(myA?`<div class="${isOk?'rev-ok':'rev-no'}">${isOk?'✅ 맞았어요!':'💔 틀렸어요'}</div>`:'<div class="rev-no">⏰ 시간 초과</div>');
+      const ansHint=`<div style="margin-top:10px;font-size:.85rem;color:rgba(109,40,217,.75);background:rgba(147,51,234,.1);border-radius:10px;padding:7px 12px;">✏️ 정답은 <strong>${ca==='O'?'⭕ (맞다)':'❌ (틀리다)'}</strong> 입니다</div>`;
+      $('revDisp').innerHTML=`<div style="font-size:3rem;margin-bottom:8px;">${ca==='O'?'⭕':'❌'}</div>`+(myA?`<div class="${isOk?'rev-ok':'rev-no'}">${isOk?'✅ 맞았어요!':'💔 틀렸어요'}</div>${!isOk?ansHint:''}`:`<div class="rev-no">⏰ 시간 초과</div>${ansHint}`);
     }
     show('scrPlayerGame');
   });
